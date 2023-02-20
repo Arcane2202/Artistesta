@@ -27,8 +27,6 @@ namespace Artistesta.Models
         public long ARTID { get; set; }
         public Nullable<int> USERID { get; set; }
         public string INSPIRATION { get; set; }
-
-        [DataType(DataType.ImageUrl)]
         public string ARTWORK { get; set; }
         public string TITLE { get; set; }
         public string TIME { get; set; }

@@ -39,6 +39,7 @@ namespace Artistesta.Controllers
         }
 
         // GET: PUBLISHARTs/Create
+        [HttpGet]
         public ActionResult Create()
         {
             ViewBag.USERID = new SelectList(db.USER, "USERID", "USERNAME");
@@ -50,7 +51,7 @@ namespace Artistesta.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ARTID,USERID,INSPIRATION,ARTWORK,TITLE,TIME,CATEGORY,ENCOURAGES,DISCOURAGES,FAVORITES,ISPINNED,FORSALE,MINIMUMBID,AUCTIONID,CURHIGHESTBID,CURBIDDERID")] PUBLISHART pUBLISHART)
+        public ActionResult Create(PUBLISHART pUBLISHART)
         {
             try { 
                 db.PUBLISHART.Add(pUBLISHART);
@@ -60,8 +61,7 @@ namespace Artistesta.Controllers
             catch(DbEntityValidationException ex)
             {
                 Debug.WriteLine(ex);
-                ViewBag.USERID = new SelectList(db.USER, "USERID", "USERNAME", pUBLISHART.USERID);
-                return View(pUBLISHART);
+                return View();
             }
         }
 
