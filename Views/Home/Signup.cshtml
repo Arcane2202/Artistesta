@@ -1,0 +1,133 @@
+﻿@using Artistesta.Models
+@model Artistesta.Models.USER
+
+@{
+    ViewBag.Title = "Signup";
+}
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+<body style="background-image: url('../Content/background.jpg'); background-size: cover ">
+        <div style="display:flex;margin-top:20px" align="center">
+
+
+        <div style="float:left;margin-left:280px">
+            <img src="~/Content/Artistesta.png" style="width:40vw;" />
+        </div>
+
+
+        <div style="float:right">
+
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal form-box" align="center" style="margin-top:50px">
+                    <h2 style="margin-bottom:50px">Sign Up</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group" style="margin: 15px;">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Username", Style = "border: 0.5px thin #f8e7f9; Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FIRST_NAME, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "First Name", Style = "border: 0.5px thin #f8e7f9;Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.FIRST_NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LAST_NAME, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Last Name", Style = "Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.LAST_NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Email", Style = "border: 0.5px thin #f8e7f9;Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.BIRTHDAY, new { htmlAttributes = new { @class = "form-control datetimepicker1",  PlaceHolder = "Birthdate (dd/mm/yyyy)", Style = "border: 0.5px thin #f8e7f9;font:black;Background-color:white;font-color:black; Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.BIRTHDAY, "", new { @class = "text-danger", })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.COUNTRY, new SelectList(Enum.GetValues(typeof(Country))), "Select Country" , new {@class = "chosen-value", htmlAttributes = new { PlaceHolder = "Country", Style = "Box-Shadow:none; width:100%; width:100%; border:none; appearance:none" } })
+                            @Html.ValidationMessageFor(model => model.COUNTRY, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.PRONOUNS, new SelectList(Enum.GetValues(typeof(Gender))), "Select Gender" , new { @class = "chosen-value", htmlAttributes = new { PlaceHolder = "Pronouns", Style = "Box-Shadow:none; width:100%; border:none; appearance:none" } })
+                            @Html.ValidationMessageFor(model => model.PRONOUNS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Password", Style = "border: 0.5px thin #f8e7f9;Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="margin: 15px">
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ConfirmPASSWORD, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Confirm Password", Style = "border: 0.5px thin #f8e7f9;Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPASSWORD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin: 15px">
+                        <div class="col-md-offset-2 col-md-10">
+                            <label style="color:red">@ViewBag.Text</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:50px;margin-bottom:10px;">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Sign Up" class="btn button" />
+                        </div>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Already Have an account? Sign In", "Login")
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

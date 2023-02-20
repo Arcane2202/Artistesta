@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Artistesta.Models.USER>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BIRTHDAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRONOUNS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COUNTRY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COVER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOTTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CARD_NO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CREATION_TIME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.USERNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FIRST_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LAST_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIRTHDAY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRONOUNS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COUNTRY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PASSWORD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COVER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CARD_NO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREATION_TIME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.USERID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.USERID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.USERID })
+        </td>
+    </tr>
+}
+
+</table>

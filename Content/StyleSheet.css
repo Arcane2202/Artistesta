@@ -1,0 +1,1003 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /*--base: #52307c;*/
+    /*--base: #663a82;*/
+    /*--base: #31b7ae;*/
+    --base: #f8e7f9;
+    --bg: #e9edec;
+}
+
+.texts {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.textsizeCorrect {
+    font-size: calc(0.5em + 0.5vw);
+}
+
+.texCorrect {
+    font-size: calc(0.2em + 0.5vw);
+}
+
+.smallerText {
+    font-size: calc(0.25em + 0.5vw);
+}
+
+.smallestText {
+    font-size: calc(0.125em + 0.25vw);
+}
+
+.biggerText {
+    font-size: calc(0.9em + 0.5vw);
+}
+
+.evenbiggerText {
+    font-size: calc(1em + 0.75vw);
+}
+
+body {
+    background-color: var(--bg);
+    color: darkslategray;
+}
+
+#profBar tr, #profBar td {
+    width: 100px;
+}
+
+.divcontainer {
+    width: 77vw;
+    margin: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+    .link:hover {
+        color: var(--base);
+        text-decoration: underline;
+    }
+
+.postcreator {
+    outline: none;
+    border-radius: 25px;
+    width: 100%;
+    border: none;
+    margin: 1%;
+    color: var(--base);
+}
+
+    .postcreator input {
+        color: var(--base);
+        cursor: pointer;
+    }
+
+    .postcreator::placeholder {
+        margin: 1%;
+        color: var(--base);
+    }
+    .custom-radio {
+        appearance: none;
+        -webkit-appearance: none;
+        border: 0.2rem solid #fff;
+        background-color: var(--bg);
+        border-radius: 50%;
+    }
+    #outline {
+        outline: 1px solid gray;
+    }
+
+    #outline:hover {
+        outline-color: gray;
+    }
+
+    #outline:checked {
+        outline-color: gray;
+        background-color: gray;
+        animation: outline-checked;
+        animation-duration: 0.1s;
+        animation-iteration-count: 4;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+    }
+
+@keyframes outline-checked {
+    0% {
+        outline-offset: 0;
+    }
+
+    100% {
+        outline-offset: -0.2rem;
+    }
+}
+.formBox {
+    width: 30vw;
+    background: white;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    margin-left: 2%;
+    padding: 50px 0;
+    color: var(--base);
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: solid thin var(--base);
+}
+
+.formBoxSignUp {
+    width: 42vw;
+    background: white;
+    margin-top: 0;
+    margin-bottom: 6%;
+    margin-left: 2%;
+    padding: 50px 0;
+    color: var(--base);
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: solid thin var(--base);
+}
+
+.postBox {
+    width: 65vw;
+    height: 80vh;
+    overflow-y: scroll;
+    background: #FDEBEDee;
+    margin: auto;
+    padding: 50px 0;
+    color: gray;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    border: solid thin var(--base);
+}
+
+.inputBox {
+    margin: 30px auto;
+    width: 80%;
+    border-bottom: 1px solid var(--base);
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-radius: 25px;
+}
+
+.inputBoxSignUp {
+    margin: 20px auto;
+    width: 80%;
+    border-bottom: 1px solid var(--base);
+    padding-top: 0px;
+    padding-bottom: 0;
+}
+
+.inputBoxMini {
+    margin: 30px auto;
+    width: 80%;
+    border-bottom: 1px solid var(--base);
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.inputText {
+    margin: 30px auto;
+    width: 80%;
+    border: 1px solid gray;
+    border-radius:25px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 5vh;
+}
+
+    .inputBoxSignUp textarea,
+    .inputBoxMini textarea,
+    .inputBox textarea,
+    .inputText textarea {
+        width: 90%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--base);
+        resize: none;
+    }
+
+textarea {
+        width: 90%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--base);
+        resize: none;
+    }
+
+
+    .inputBoxSignUp input,
+    .inputBox input,
+    .inputBoxMini input,
+    .inputText input,
+    .input {
+        width: 80%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--base);
+    }
+.inputText input::placeholder {
+    color : gray;
+}
+.inputrigger {
+    margin: 30px auto;
+    width: 90%;
+}
+
+    .inputrigger::placeholder {
+        color: var(--base);
+    }
+
+    .inputrigger input[type=text] {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid var(--base);
+        background: transparent;
+        color: var(--base);
+        margin-left: 2%;
+    }
+
+.fa {
+    margin-right: 10px;
+}
+
+.toggle {
+    position: absolute;
+}
+
+    .toggle:hover {
+        cursor: pointer;
+    }
+
+.loginBtn {
+    margin: 40px auto 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    border: 1px solid var(--base);
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.signupBtn {
+    margin: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: 1px solid var(--base);
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.postBtn {
+    float: right;
+    margin: 40px auto 20px 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    border: 1px solid var(--base);
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.cmpostBtn {
+    float: right;
+    margin: 6px auto 0px 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border: 1px solid var(--base);
+    font-size: 10px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+#div {
+    justify-content: center;
+}
+
+#table {
+    margin: 0 auto;
+    margin-top: 200px;
+}
+
+.viewBtn {
+    float: left;
+    margin: 10px 10px 10px 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 1px solid var(--base);
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.logBtn {
+    float: right;
+    margin: 10px auto 10px 20px;
+    margin-right: 320px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border: 1px solid var(--base);
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.showuser tr {
+    border: solid thin;
+    background-color: var(--base);
+}
+
+.diagBtn {
+    float: center;
+    margin: 40px auto 20px 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    border: 1px solid var(--base);
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.signupBtn:hover,
+.loginBtn:hover {
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: var(--base);
+}
+
+.postBtn:hover, .diagBtn:hover, .cmpostBtn:hover, .viewBtn:hover, .logBtn:hover {
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: var(--base);
+}
+
+.ic1,
+.ic2 {
+    font-size: 4vw;
+}
+
+.ic1 {
+    margin-right: 3%;
+}
+
+    .ic1:hover,
+    .ic2:hover {
+        box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    }
+
+#pronoun {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--base);
+    border-bottom: 1px solid var(--base);
+    width: 70px;
+    text-align: center;
+}
+
+input[type="radio"]:checked {
+    background-color: rgba(15, 7, 6, 0.8);
+    content: "";
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid var(--base);
+}
+
+a {
+    text-decoration: none;
+}
+
+.header_wrapper .navbar {
+    padding: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    -webkit-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+#bottomLine {
+    background-color: white;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.header_wrapper .navbar-brand img {
+    max-width: 120px;
+    height: auto;
+}
+
+.header_wrapper .nav-item .nav-link {
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    display: inline-block;
+}
+
+#dp {
+    width: 10vw;
+    border-radius: 50%;
+}
+
+#smoldp {
+    border-radius: 50%;
+    width: 5.5vh;
+}
+
+.profileBtn {
+    border-radius: 40vh;
+    border: none;
+    width: 12vw;
+    text-align: center;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    margin-bottom: 10px;
+    color: white;
+    background-color: var(--base);
+}
+
+#header-blue {
+    width: 100%;
+    margin-bottom: 50px;
+    height: auto;
+    color: #fff;
+}
+
+#headers-wrap {
+    text-align: center;
+    margin: 0 auto;
+    padding: 1rem 2.5rem;
+    padding-left: 13vh;
+    padding-right: 13vh;
+}
+
+    #headers-wrap div {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+.header-left {
+    float: left;
+    width: 10vw;
+}
+
+.header-right {
+    float: right;
+    margin-top: 0.75%;
+    width: 10vw;
+}
+
+.header-center {
+    margin: 0 auto !important;
+    display: inline-block;
+    width: 10vw;
+}
+
+.Center {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    background-color: blue;
+    top: 15%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+
+#postPart {
+    padding-left: 18vh;
+    padding-right: 18vh;
+}
+
+#profilePart {
+    position: fixed;
+    width: 100%;
+    padding-left: 4.8vh;
+    padding-right: 4.8vh;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    margin-top: 75px;
+    margin-right: 25vh;
+    padding-top: 7vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/*
+style=""
+
+.drafter{
+  border-radius: 25px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+*/
+#searchBar {
+    color: gray;
+    border-radius: 50px;
+    border: solid thin;
+    border-color: var(--base);
+    color: gray;
+    font-size: 2.5vh;
+}
+
+.search input[type="text"] {
+    width: 100%;
+    padding-left: 25px;
+    outline: none;
+    font-size: smaller;
+}
+
+    .search input[type="text"]:focus {
+        border-color: gray;
+    }
+
+::placeholder {
+    color: gray;
+}
+
+#profilePart .navbar {
+    margin-top: 2.5%;
+    margin-bottom: 0;
+}
+
+#profilePart .nav-item .nav-link {
+    width: 100px;
+    text-align: center;
+    margin-top: -8.5%;
+}
+
+    #profilePart .nav-item .nav-link:hover,
+    #profilePart .nav-item .nav-link:focus {
+        border-top: solid thick;
+        border-color: var(--base);
+        cursor: pointer;
+    }
+
+#statusBar {
+    width: 10px;
+    margin-top: 3%;
+    padding: 4%;
+    margin-left: 23px;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#proStatusBar {
+    width: 10px;
+    margin-top: 0;
+    padding: 4%;
+    margin-left: 23px;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#status {
+    padding: 0.5%;
+    padding-right: 2%;
+    display: inline-block;
+    margin-bottom: 3%;
+    margin-right: 5%;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+#reactSec {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5px 25vh 5px 25vh;
+}
+
+.react {
+    width: 100px;
+    border-right: solid thin;
+    border-color: var(--base);
+}
+
+#rightButton {
+    padding: 0px;
+    margin: 5vw 0 1vw 2vw;
+    width: 4vw;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+#leftButton {
+    padding: 0px;
+    margin: 5vw 5vw 1vw 90vw;
+    width: 4vw;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+@keyframes float {
+    0% {
+        box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+        transform: translatey(0px);
+    }
+
+    50% {
+        box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+        transform: translatey(-10px);
+    }
+
+    100% {
+        box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+        transform: translatey(0px);
+    }
+}
+
+.float {
+    animation-name: float;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+#pagelogo {
+    padding-top: 10%;
+    width: 85%;
+    margin: auto;
+    margin-left: 6%;
+}
+
+#loginlogo {
+    padding-top: 8%;
+    width: 75%;
+    margin: auto;
+    margin-left: 13%;
+}
+
+.notificationContainer {
+    margin-top: 0.5%;
+    min-height: 90vh;
+    padding: 2.6%;
+    padding-left: 0px;
+    padding-right: 0px;
+    float: right;
+    flex: 1;
+}
+
+.notificationBar {
+    position: fixed;
+    margin-top: 2.7%;
+    width: 16.5%;
+    min-height: 86vh;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.pronotificationBar {
+    position: fixed;
+    margin-top: 1%;
+    width: 16.5%;
+    height: 65vh;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.notification {
+    width: 100%;
+    float: left;
+    margin: 3%;
+    margin-bottom: 1%;
+}
+
+    .notification img {
+        width: 7vh;
+        float: left;
+        margin: 2%;
+        margin-top: 0;
+        border-radius: 50%;
+        margin-right: 2vh;
+    }
+
+.postContainer {
+    margin-top: 0.1%;
+    min-height: 90vh;
+    float: center;
+    flex: 2.8;
+    padding: 2.6%;
+    padding-bottom: 0px;
+    padding-right: 35px;
+    padding-left: 0px;
+    margin-left: 2%;
+    margin-right: -5.8px;
+}
+
+.followerContainer {
+    margin-top: 0.5%;
+    height: 42vh;
+    float: left;
+    padding: 2.6%;
+    flex: 1;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-y: scroll;
+}
+
+.followerBar {
+    position: fixed;
+    width: 16.5%;
+    min-height: 42vh;
+    margin-top: 2.7%;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding-right: 15px;
+}
+
+.profollowerBar {
+    position: fixed;
+    width: 16.5%;
+    height: 32vh;
+    margin-top: 1%;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding-right: 15px;
+}
+
+.follower {
+    width: 100%;
+    float: left;
+    margin: 3%;
+    margin-bottom: 1%;
+}
+
+
+    .notification img,
+    .follower img {
+        width: 4.5vh;
+        float: left;
+        margin: 2%;
+        margin-top: 0;
+        border-radius: 50%;
+        margin-right: 2vh;
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+a {
+    text-decoration: none;
+}
+
+.texthover {
+    color: var(--base);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 5%;
+}
+
+    .texthover:hover {
+        color: gray;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg);
+    min-width: 150px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: gray;
+        padding: 6px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.trigger-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg);
+    min-width: 150px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.trigger:hover .trigger-content {
+    display: block;
+}
+
+
+.centerForm {
+    margin: auto;
+    width: 50vw;
+    padding-top: 5vh;
+    padding-left: 4vw;
+}
+
+[data-tab-content] {
+    display: none;
+}
+
+.active[data-tab-content] {
+    display: block;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    padding-right: 1%;
+    list-style-type: none;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px;
+}
+
+    .tab.active {
+        border-top: solid thick;
+        border-color: var(--base);
+        background-color: #fff;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .tab:hover {
+        border-top: solid thick;
+        border-color: var(--base);
+    }
+
+
+
+.anotherContainer {
+    margin-top: 1%;
+    height: 80%;
+    float: left;
+    padding: 2.6%;
+    flex: 1;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-y: scroll;
+}
+
+
+.anotherfollowerBar {
+    position: fixed;
+    width: 16.5%;
+    height: 88%;
+    margin-top: 1%;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding-right: 15px;
+}
+
+.homfollowerBar {
+    position: fixed;
+    width: 16.5%;
+    height: 40%;
+    margin-top: 1%;
+    margin-right: 17vh;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding-right: 15px;
+}
+
+.homfollowerContainer {
+    margin-top: 1%;
+    height: 40%;
+    float: left;
+    padding: 2.6%;
+    flex: 1;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-y: scroll;
+}
+
+.commentBox {
+    margin: 5%;
+    margin-left: 0;
+    margin-right: 0;
+    border-bottom: solid thin;
+    overflow-y: scroll;
+}
+
+.commentposter {
+    border: none;
+}
+
+    .commentposter textarea {
+        width: 100%;
+        border-radius: 10px;
+        padding: 1%;
+        font-family: var(--primary-font);
+        background-color: var(--col3);
+        color: var(--base);
+        resize: none;
+        border: solid thin;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        outline: none;
+    }

@@ -1,0 +1,68 @@
+﻿@model Artistesta.Models.USER
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+<body style="background-image:url('../Content/background.jpg');background-size:cover "align="center">
+    <div style="display:flex;margin-top:20px" align="center">
+
+
+        <div style="float:left; margin-left:280px">
+            <img src="~/Content/Artistesta.png" style="width:40vw;" />
+        </div>
+
+
+        <div style="float:right">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal form-box" align="center" style="margin-top:100px">
+                    <h2 style="margin-bottom:80px">Sign In</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+              
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control", PlaceHolder="Username",Style="Box-Shadow:none; width:100%" } })
+                            @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group"style="margin: 15px;">
+                    
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control", Style = "Box-Shadow:none", PlaceHolder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group"style="margin: 15px;">
+                        <div class="col-md-offset-2 col-md-10">
+                            <label style="color:red">@ViewBag.Text</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 50px; margin-bottom: 10px;">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Login" class="btn button" />
+                        </div>
+                    </div>
+
+                    <div>
+                        @Html.ActionLink("Don't Have an account? Sign Up!", "Signup")
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

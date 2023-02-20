@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Artistesta.Models.PUBLISHART>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.INSPIRATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARTWORK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TITLE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ENCOURAGES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISCOURAGES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FAVORITES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISPINNED)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FORSALE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MINIMUMBID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AUCTIONID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CURHIGHESTBID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CURBIDDERID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER.USERNAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.INSPIRATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARTWORK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TITLE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ENCOURAGES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISCOURAGES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FAVORITES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISPINNED)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FORSALE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MINIMUMBID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AUCTIONID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CURHIGHESTBID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CURBIDDERID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER.USERNAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ARTID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ARTID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ARTID })
+        </td>
+    </tr>
+}
+
+</table>

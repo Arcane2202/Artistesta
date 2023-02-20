@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ArtistestaModelStoreContainer" CdmEntityContainer="ArtistestaEntities">
+    <EntitySetMapping Name="AUCTION">
+      <EntityTypeMapping TypeName="ArtistestaModel.AUCTION">
+        <MappingFragment StoreEntitySet="AUCTION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AUCID" ColumnName="AUCID" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="EDATE" ColumnName="EDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BIDDER">
+      <EntityTypeMapping TypeName="ArtistestaModel.BIDDER">
+        <MappingFragment StoreEntitySet="BIDDER">
+          <ScalarProperty Name="BIDID" ColumnName="BIDID" />
+          <ScalarProperty Name="BIDDERID" ColumnName="BIDDERID" />
+          <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+          <ScalarProperty Name="BIDAMOUNT" ColumnName="BIDAMOUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMMENTS">
+      <EntityTypeMapping TypeName="ArtistestaModel.COMMENTS">
+        <MappingFragment StoreEntitySet="COMMENTS">
+          <ScalarProperty Name="CMID" ColumnName="CMID" />
+          <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+          <ScalarProperty Name="COMMENTERID" ColumnName="COMMENTERID" />
+          <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FAVORITES">
+      <EntityTypeMapping TypeName="ArtistestaModel.FAVORITES">
+        <MappingFragment StoreEntitySet="FAVORITES">
+          <ScalarProperty Name="FAVID" ColumnName="FAVID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FOLLOWER">
+      <EntityTypeMapping TypeName="ArtistestaModel.FOLLOWER">
+        <MappingFragment StoreEntitySet="FOLLOWER">
+          <ScalarProperty Name="FID" ColumnName="FID" />
+          <ScalarProperty Name="FOLLOWERID" ColumnName="FOLLOWERID" />
+          <ScalarProperty Name="FOLLOWINGID" ColumnName="FOLLOWINGID" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INTERACTION">
+      <EntityTypeMapping TypeName="ArtistestaModel.INTERACTION">
+        <MappingFragment StoreEntitySet="INTERACTION">
+          <ScalarProperty Name="INTID" ColumnName="INTID" />
+          <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+          <ScalarProperty Name="ENCDISC" ColumnName="ENCDISC" />
+          <ScalarProperty Name="INTERACTORID" ColumnName="INTERACTORID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PUBLISHART">
+      <EntityTypeMapping TypeName="ArtistestaModel.PUBLISHART">
+        <MappingFragment StoreEntitySet="PUBLISHART">
+          <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="INSPIRATION" ColumnName="INSPIRATION" />
+          <ScalarProperty Name="ARTWORK" ColumnName="ARTWORK" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="TIME" ColumnName="TIME" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="ENCOURAGES" ColumnName="ENCOURAGES" />
+          <ScalarProperty Name="DISCOURAGES" ColumnName="DISCOURAGES" />
+          <ScalarProperty Name="FAVORITES" ColumnName="FAVORITES" />
+          <ScalarProperty Name="ISPINNED" ColumnName="ISPINNED" />
+          <ScalarProperty Name="FORSALE" ColumnName="FORSALE" />
+          <ScalarProperty Name="MINIMUMBID" ColumnName="MINIMUMBID" />
+          <ScalarProperty Name="AUCTIONID" ColumnName="AUCTIONID" />
+          <ScalarProperty Name="CURHIGHESTBID" ColumnName="CURHIGHESTBID" />
+          <ScalarProperty Name="CURBIDDERID" ColumnName="CURBIDDERID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUPPORT">
+      <EntityTypeMapping TypeName="ArtistestaModel.SUPPORT">
+        <MappingFragment StoreEntitySet="SUPPORT">
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+          <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ArtistestaModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER">
+      <EntityTypeMapping TypeName="ArtistestaModel.USER">
+        <MappingFragment StoreEntitySet="USER">
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+          <ScalarProperty Name="PRONOUNS" ColumnName="PRONOUNS" />
+          <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="DP" ColumnName="DP" />
+          <ScalarProperty Name="COVER" ColumnName="COVER" />
+          <ScalarProperty Name="MOTTO" ColumnName="MOTTO" />
+          <ScalarProperty Name="CARD_NO" ColumnName="CARD_NO" />
+          <ScalarProperty Name="CREATION_TIME" ColumnName="CREATION_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

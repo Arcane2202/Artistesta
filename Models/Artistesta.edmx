@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ArtistestaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUCTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AUCID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SDATE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EDATE" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BIDDER">
+          <Key>
+            <PropertyRef Name="BIDID" />
+          </Key>
+          <Property Name="BIDID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BIDDERID" Type="int" />
+          <Property Name="ARTID" Type="bigint" />
+          <Property Name="BIDAMOUNT" Type="bigint" />
+        </EntityType>
+        <EntityType Name="COMMENTS">
+          <Key>
+            <PropertyRef Name="CMID" />
+          </Key>
+          <Property Name="CMID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ARTID" Type="bigint" />
+          <Property Name="COMMENTERID" Type="int" />
+          <Property Name="COMMENT" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FAVORITES">
+          <Key>
+            <PropertyRef Name="FAVID" />
+          </Key>
+          <Property Name="FAVID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="ARTID" Type="bigint" />
+          <Property Name="DATE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FOLLOWER">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FOLLOWERID" Type="int" />
+          <Property Name="FOLLOWINGID" Type="int" />
+          <Property Name="DATE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="INTERACTION">
+          <Key>
+            <PropertyRef Name="INTID" />
+          </Key>
+          <Property Name="INTID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ARTID" Type="bigint" />
+          <Property Name="ENCDISC" Type="nvarchar" MaxLength="100" />
+          <Property Name="INTERACTORID" Type="int" />
+        </EntityType>
+        <EntityType Name="PUBLISHART">
+          <Key>
+            <PropertyRef Name="ARTID" />
+          </Key>
+          <Property Name="ARTID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="INSPIRATION" Type="text" />
+          <Property Name="ARTWORK" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TITLE" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TIME" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CATEGORY" Type="nvarchar" MaxLength="100" />
+          <Property Name="ENCOURAGES" Type="bigint" />
+          <Property Name="DISCOURAGES" Type="bigint" />
+          <Property Name="FAVORITES" Type="bigint" />
+          <Property Name="ISPINNED" Type="bit" />
+          <Property Name="FORSALE" Type="bit" Nullable="false" />
+          <Property Name="MINIMUMBID" Type="nvarchar" MaxLength="100" />
+          <Property Name="AUCTIONID" Type="nvarchar" MaxLength="100" />
+          <Property Name="CURHIGHESTBID" Type="nvarchar" MaxLength="100" />
+          <Property Name="CURBIDDERID" Type="nvarchar" MaxLength="100" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SUPPORT">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="SUBJECT" Type="nvarchar" MaxLength="100" />
+          <Property Name="MESSAGE" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PRONOUNS" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="COUNTRY" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DP" Type="nvarchar" MaxLength="100" />
+          <Property Name="COVER" Type="nvarchar" MaxLength="100" />
+          <Property Name="MOTTO" Type="nvarchar" MaxLength="100" />
+          <Property Name="CARD_NO" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATION_TIME" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BIDDER__ARTID__5070F446">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="BIDDER" Type="Self.BIDDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="BIDDER">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BIDDER__BIDDERID__4F7CD00D">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="BIDDER" Type="Self.BIDDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="BIDDER">
+              <PropertyRef Name="BIDDERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMMENTS__ARTID__571DF1D5">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="COMMENTS" Type="Self.COMMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="COMMENTS">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMMENTS__COMMEN__5812160E">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="COMMENTS" Type="Self.COMMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="COMMENTS">
+              <PropertyRef Name="COMMENTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FAVORITES__ARTID__5FB337D6">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="FAVORITES" Type="Self.FAVORITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="FAVORITES">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FAVORITES__USERI__5EBF139D">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FAVORITES" Type="Self.FAVORITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FAVORITES">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOLLOWER__FOLLOW__5AEE82B9">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FOLLOWER" Type="Self.FOLLOWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FOLLOWER">
+              <PropertyRef Name="FOLLOWERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOLLOWER__FOLLOW__5BE2A6F2">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FOLLOWER" Type="Self.FOLLOWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FOLLOWER">
+              <PropertyRef Name="FOLLOWINGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INTERACTI__ARTID__534D60F1">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="INTERACTION" Type="Self.INTERACTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="INTERACTION">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INTERACTI__INTER__5441852A">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="INTERACTION" Type="Self.INTERACTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="INTERACTION">
+              <PropertyRef Name="INTERACTORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PUBLISHAR__AUCTI__7B5B524B' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PUBLISHAR__AUCTI__7B5B524B" />-->
+        <Association Name="FK__PUBLISHAR__USERI__4CA06362">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="PUBLISHART">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUPPORT__USERID__628FA481">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SUPPORT" Type="Self.SUPPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="SUPPORT">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArtistestaModelStoreContainer">
+          <EntitySet Name="AUCTION" EntityType="Self.AUCTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIDDER" EntityType="Self.BIDDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMMENTS" EntityType="Self.COMMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAVORITES" EntityType="Self.FAVORITES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FOLLOWER" EntityType="Self.FOLLOWER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INTERACTION" EntityType="Self.INTERACTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PUBLISHART" EntityType="Self.PUBLISHART" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUPPORT" EntityType="Self.SUPPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BIDDER__ARTID__5070F446" Association="Self.FK__BIDDER__ARTID__5070F446">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="BIDDER" EntitySet="BIDDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BIDDER__BIDDERID__4F7CD00D" Association="Self.FK__BIDDER__BIDDERID__4F7CD00D">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="BIDDER" EntitySet="BIDDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMMENTS__ARTID__571DF1D5" Association="Self.FK__COMMENTS__ARTID__571DF1D5">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="COMMENTS" EntitySet="COMMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMMENTS__COMMEN__5812160E" Association="Self.FK__COMMENTS__COMMEN__5812160E">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="COMMENTS" EntitySet="COMMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FAVORITES__ARTID__5FB337D6" Association="Self.FK__FAVORITES__ARTID__5FB337D6">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="FAVORITES" EntitySet="FAVORITES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FAVORITES__USERI__5EBF139D" Association="Self.FK__FAVORITES__USERI__5EBF139D">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FAVORITES" EntitySet="FAVORITES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOLLOWER__FOLLOW__5AEE82B9" Association="Self.FK__FOLLOWER__FOLLOW__5AEE82B9">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FOLLOWER" EntitySet="FOLLOWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOLLOWER__FOLLOW__5BE2A6F2" Association="Self.FK__FOLLOWER__FOLLOW__5BE2A6F2">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FOLLOWER" EntitySet="FOLLOWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INTERACTI__ARTID__534D60F1" Association="Self.FK__INTERACTI__ARTID__534D60F1">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="INTERACTION" EntitySet="INTERACTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INTERACTI__INTER__5441852A" Association="Self.FK__INTERACTI__INTER__5441852A">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="INTERACTION" EntitySet="INTERACTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PUBLISHAR__USERI__4CA06362" Association="Self.FK__PUBLISHAR__USERI__4CA06362">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUPPORT__USERID__628FA481" Association="Self.FK__SUPPORT__USERID__628FA481">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SUPPORT" EntitySet="SUPPORT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArtistestaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUCTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AUCID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EDATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BIDDER">
+          <Key>
+            <PropertyRef Name="BIDID" />
+          </Key>
+          <Property Name="BIDID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BIDDERID" Type="Int32" />
+          <Property Name="ARTID" Type="Int64" />
+          <Property Name="BIDAMOUNT" Type="Int64" />
+          <NavigationProperty Name="PUBLISHART" Relationship="Self.FK__BIDDER__ARTID__5070F446" FromRole="BIDDER" ToRole="PUBLISHART" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__BIDDER__BIDDERID__4F7CD00D" FromRole="BIDDER" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="COMMENTS">
+          <Key>
+            <PropertyRef Name="CMID" />
+          </Key>
+          <Property Name="CMID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ARTID" Type="Int64" />
+          <Property Name="COMMENTERID" Type="Int32" />
+          <Property Name="COMMENT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PUBLISHART" Relationship="Self.FK__COMMENTS__ARTID__571DF1D5" FromRole="COMMENTS" ToRole="PUBLISHART" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__COMMENTS__COMMEN__5812160E" FromRole="COMMENTS" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="FAVORITES">
+          <Key>
+            <PropertyRef Name="FAVID" />
+          </Key>
+          <Property Name="FAVID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="ARTID" Type="Int64" />
+          <Property Name="DATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PUBLISHART" Relationship="Self.FK__FAVORITES__ARTID__5FB337D6" FromRole="FAVORITES" ToRole="PUBLISHART" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__FAVORITES__USERI__5EBF139D" FromRole="FAVORITES" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="FOLLOWER">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FOLLOWERID" Type="Int32" />
+          <Property Name="FOLLOWINGID" Type="Int32" />
+          <Property Name="DATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__FOLLOWER__FOLLOW__5AEE82B9" FromRole="FOLLOWER" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="Self.FK__FOLLOWER__FOLLOW__5BE2A6F2" FromRole="FOLLOWER" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="INTERACTION">
+          <Key>
+            <PropertyRef Name="INTID" />
+          </Key>
+          <Property Name="INTID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ARTID" Type="Int64" />
+          <Property Name="ENCDISC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="INTERACTORID" Type="Int32" />
+          <NavigationProperty Name="PUBLISHART" Relationship="Self.FK__INTERACTI__ARTID__534D60F1" FromRole="INTERACTION" ToRole="PUBLISHART" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__INTERACTI__INTER__5441852A" FromRole="INTERACTION" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="PUBLISHART">
+          <Key>
+            <PropertyRef Name="ARTID" />
+          </Key>
+          <Property Name="ARTID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="INSPIRATION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ARTWORK" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TITLE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TIME" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CATEGORY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ENCOURAGES" Type="Int64" />
+          <Property Name="DISCOURAGES" Type="Int64" />
+          <Property Name="FAVORITES" Type="Int64" />
+          <Property Name="ISPINNED" Type="Boolean" />
+          <Property Name="FORSALE" Type="Boolean" Nullable="false" />
+          <Property Name="MINIMUMBID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AUCTIONID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CURHIGHESTBID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CURBIDDERID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BIDDER" Relationship="Self.FK__BIDDER__ARTID__5070F446" FromRole="PUBLISHART" ToRole="BIDDER" />
+          <NavigationProperty Name="COMMENTS" Relationship="Self.FK__COMMENTS__ARTID__571DF1D5" FromRole="PUBLISHART" ToRole="COMMENTS" />
+          <NavigationProperty Name="FAVORITES1" Relationship="Self.FK__FAVORITES__ARTID__5FB337D6" FromRole="PUBLISHART" ToRole="FAVORITES" />
+          <NavigationProperty Name="INTERACTION" Relationship="Self.FK__INTERACTI__ARTID__534D60F1" FromRole="PUBLISHART" ToRole="INTERACTION" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__PUBLISHAR__USERI__4CA06362" FromRole="PUBLISHART" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="SUPPORT">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="SUBJECT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MESSAGE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__SUPPORT__USERID__628FA481" FromRole="SUPPORT" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PRONOUNS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="COUNTRY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="COVER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MOTTO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CARD_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATION_TIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BIDDER" Relationship="Self.FK__BIDDER__BIDDERID__4F7CD00D" FromRole="USER" ToRole="BIDDER" />
+          <NavigationProperty Name="COMMENTS" Relationship="Self.FK__COMMENTS__COMMEN__5812160E" FromRole="USER" ToRole="COMMENTS" />
+          <NavigationProperty Name="FAVORITES" Relationship="Self.FK__FAVORITES__USERI__5EBF139D" FromRole="USER" ToRole="FAVORITES" />
+          <NavigationProperty Name="FOLLOWER" Relationship="Self.FK__FOLLOWER__FOLLOW__5AEE82B9" FromRole="USER" ToRole="FOLLOWER" />
+          <NavigationProperty Name="FOLLOWER1" Relationship="Self.FK__FOLLOWER__FOLLOW__5BE2A6F2" FromRole="USER" ToRole="FOLLOWER" />
+          <NavigationProperty Name="INTERACTION" Relationship="Self.FK__INTERACTI__INTER__5441852A" FromRole="USER" ToRole="INTERACTION" />
+          <NavigationProperty Name="PUBLISHART" Relationship="Self.FK__PUBLISHAR__USERI__4CA06362" FromRole="USER" ToRole="PUBLISHART" />
+          <NavigationProperty Name="SUPPORT" Relationship="Self.FK__SUPPORT__USERID__628FA481" FromRole="USER" ToRole="SUPPORT" />
+        </EntityType>
+        <Association Name="FK__BIDDER__ARTID__5070F446">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="BIDDER" Type="Self.BIDDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="BIDDER">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BIDDER__BIDDERID__4F7CD00D">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="BIDDER" Type="Self.BIDDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="BIDDER">
+              <PropertyRef Name="BIDDERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMMENTS__ARTID__571DF1D5">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="COMMENTS" Type="Self.COMMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="COMMENTS">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMMENTS__COMMEN__5812160E">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="COMMENTS" Type="Self.COMMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="COMMENTS">
+              <PropertyRef Name="COMMENTERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FAVORITES__ARTID__5FB337D6">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="FAVORITES" Type="Self.FAVORITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="FAVORITES">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FAVORITES__USERI__5EBF139D">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FAVORITES" Type="Self.FAVORITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FAVORITES">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOLLOWER__FOLLOW__5AEE82B9">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FOLLOWER" Type="Self.FOLLOWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FOLLOWER">
+              <PropertyRef Name="FOLLOWERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FOLLOWER__FOLLOW__5BE2A6F2">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="FOLLOWER" Type="Self.FOLLOWER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="FOLLOWER">
+              <PropertyRef Name="FOLLOWINGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INTERACTI__ARTID__534D60F1">
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="0..1" />
+          <End Role="INTERACTION" Type="Self.INTERACTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUBLISHART">
+              <PropertyRef Name="ARTID" />
+            </Principal>
+            <Dependent Role="INTERACTION">
+              <PropertyRef Name="ARTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INTERACTI__INTER__5441852A">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="INTERACTION" Type="Self.INTERACTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="INTERACTION">
+              <PropertyRef Name="INTERACTORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PUBLISHAR__USERI__4CA06362">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="PUBLISHART" Type="Self.PUBLISHART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="PUBLISHART">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUPPORT__USERID__628FA481">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SUPPORT" Type="Self.SUPPORT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USERID" />
+            </Principal>
+            <Dependent Role="SUPPORT">
+              <PropertyRef Name="USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArtistestaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUCTION" EntityType="Self.AUCTION" />
+          <EntitySet Name="BIDDER" EntityType="Self.BIDDER" />
+          <EntitySet Name="COMMENTS" EntityType="Self.COMMENTS" />
+          <EntitySet Name="FAVORITES" EntityType="Self.FAVORITES" />
+          <EntitySet Name="FOLLOWER" EntityType="Self.FOLLOWER" />
+          <EntitySet Name="INTERACTION" EntityType="Self.INTERACTION" />
+          <EntitySet Name="PUBLISHART" EntityType="Self.PUBLISHART" />
+          <EntitySet Name="SUPPORT" EntityType="Self.SUPPORT" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <AssociationSet Name="FK__BIDDER__ARTID__5070F446" Association="Self.FK__BIDDER__ARTID__5070F446">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="BIDDER" EntitySet="BIDDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BIDDER__BIDDERID__4F7CD00D" Association="Self.FK__BIDDER__BIDDERID__4F7CD00D">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="BIDDER" EntitySet="BIDDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMMENTS__ARTID__571DF1D5" Association="Self.FK__COMMENTS__ARTID__571DF1D5">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="COMMENTS" EntitySet="COMMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMMENTS__COMMEN__5812160E" Association="Self.FK__COMMENTS__COMMEN__5812160E">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="COMMENTS" EntitySet="COMMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FAVORITES__ARTID__5FB337D6" Association="Self.FK__FAVORITES__ARTID__5FB337D6">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="FAVORITES" EntitySet="FAVORITES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FAVORITES__USERI__5EBF139D" Association="Self.FK__FAVORITES__USERI__5EBF139D">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FAVORITES" EntitySet="FAVORITES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOLLOWER__FOLLOW__5AEE82B9" Association="Self.FK__FOLLOWER__FOLLOW__5AEE82B9">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FOLLOWER" EntitySet="FOLLOWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FOLLOWER__FOLLOW__5BE2A6F2" Association="Self.FK__FOLLOWER__FOLLOW__5BE2A6F2">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="FOLLOWER" EntitySet="FOLLOWER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INTERACTI__ARTID__534D60F1" Association="Self.FK__INTERACTI__ARTID__534D60F1">
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+            <End Role="INTERACTION" EntitySet="INTERACTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INTERACTI__INTER__5441852A" Association="Self.FK__INTERACTI__INTER__5441852A">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="INTERACTION" EntitySet="INTERACTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PUBLISHAR__USERI__4CA06362" Association="Self.FK__PUBLISHAR__USERI__4CA06362">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="PUBLISHART" EntitySet="PUBLISHART" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUPPORT__USERID__628FA481" Association="Self.FK__SUPPORT__USERID__628FA481">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SUPPORT" EntitySet="SUPPORT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArtistestaModelStoreContainer" CdmEntityContainer="ArtistestaEntities">
+          <EntitySetMapping Name="AUCTION">
+            <EntityTypeMapping TypeName="ArtistestaModel.AUCTION">
+              <MappingFragment StoreEntitySet="AUCTION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AUCID" ColumnName="AUCID" />
+                <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+                <ScalarProperty Name="EDATE" ColumnName="EDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIDDER">
+            <EntityTypeMapping TypeName="ArtistestaModel.BIDDER">
+              <MappingFragment StoreEntitySet="BIDDER">
+                <ScalarProperty Name="BIDID" ColumnName="BIDID" />
+                <ScalarProperty Name="BIDDERID" ColumnName="BIDDERID" />
+                <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+                <ScalarProperty Name="BIDAMOUNT" ColumnName="BIDAMOUNT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMENTS">
+            <EntityTypeMapping TypeName="ArtistestaModel.COMMENTS">
+              <MappingFragment StoreEntitySet="COMMENTS">
+                <ScalarProperty Name="CMID" ColumnName="CMID" />
+                <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+                <ScalarProperty Name="COMMENTERID" ColumnName="COMMENTERID" />
+                <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAVORITES">
+            <EntityTypeMapping TypeName="ArtistestaModel.FAVORITES">
+              <MappingFragment StoreEntitySet="FAVORITES">
+                <ScalarProperty Name="FAVID" ColumnName="FAVID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FOLLOWER">
+            <EntityTypeMapping TypeName="ArtistestaModel.FOLLOWER">
+              <MappingFragment StoreEntitySet="FOLLOWER">
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="FOLLOWERID" ColumnName="FOLLOWERID" />
+                <ScalarProperty Name="FOLLOWINGID" ColumnName="FOLLOWINGID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INTERACTION">
+            <EntityTypeMapping TypeName="ArtistestaModel.INTERACTION">
+              <MappingFragment StoreEntitySet="INTERACTION">
+                <ScalarProperty Name="INTID" ColumnName="INTID" />
+                <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+                <ScalarProperty Name="ENCDISC" ColumnName="ENCDISC" />
+                <ScalarProperty Name="INTERACTORID" ColumnName="INTERACTORID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PUBLISHART">
+            <EntityTypeMapping TypeName="ArtistestaModel.PUBLISHART">
+              <MappingFragment StoreEntitySet="PUBLISHART">
+                <ScalarProperty Name="ARTID" ColumnName="ARTID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="INSPIRATION" ColumnName="INSPIRATION" />
+                <ScalarProperty Name="ARTWORK" ColumnName="ARTWORK" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="TIME" ColumnName="TIME" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="ENCOURAGES" ColumnName="ENCOURAGES" />
+                <ScalarProperty Name="DISCOURAGES" ColumnName="DISCOURAGES" />
+                <ScalarProperty Name="FAVORITES" ColumnName="FAVORITES" />
+                <ScalarProperty Name="ISPINNED" ColumnName="ISPINNED" />
+                <ScalarProperty Name="FORSALE" ColumnName="FORSALE" />
+                <ScalarProperty Name="MINIMUMBID" ColumnName="MINIMUMBID" />
+                <ScalarProperty Name="AUCTIONID" ColumnName="AUCTIONID" />
+                <ScalarProperty Name="CURHIGHESTBID" ColumnName="CURHIGHESTBID" />
+                <ScalarProperty Name="CURBIDDERID" ColumnName="CURBIDDERID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPORT">
+            <EntityTypeMapping TypeName="ArtistestaModel.SUPPORT">
+              <MappingFragment StoreEntitySet="SUPPORT">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ArtistestaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="ArtistestaModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="PRONOUNS" ColumnName="PRONOUNS" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="DP" ColumnName="DP" />
+                <ScalarProperty Name="COVER" ColumnName="COVER" />
+                <ScalarProperty Name="MOTTO" ColumnName="MOTTO" />
+                <ScalarProperty Name="CARD_NO" ColumnName="CARD_NO" />
+                <ScalarProperty Name="CREATION_TIME" ColumnName="CREATION_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

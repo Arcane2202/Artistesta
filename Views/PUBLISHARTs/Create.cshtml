@@ -1,0 +1,74 @@
+﻿@model Artistesta.Models.PUBLISHART
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/Content/StyleSheet.css" rel="stylesheet" />
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Create", "PUBLISHARTs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="poster" style="position: absolute;display:block;margin-top:-85px; width:100%;height:120vh;background-color: #000000aa; z-index: 999999">
+        <div class="postBox" style="padding:20px; padding-left:0px; margin-top:150px" align="center">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form method="post" action="">
+
+                <div class="inputText">
+
+                    <!--<input type="text" id="title" name="title" value='' placeholder="Enter Title">-->
+                    @Html.EditorFor(model => model.TITLE, new { htmlAttributes = new { @class = "inputText", id = "title", Style = "padding:0px;margin:5px;margin-right:500px", PlaceHolder = "A Title for your creation" } })
+                    @Html.ValidationMessageFor(model => model.TITLE, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="inputText">
+
+
+                    @Html.EditorFor(model => model.INSPIRATION, new { htmlAttributes = new { @class = "inputText", id = "inspiration", Style = "padding:0px;margin:5px;margin-right:500px", PlaceHolder = "You inspiration behind this artwork..." } })
+                    @Html.ValidationMessageFor(model => model.INSPIRATION, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="inputText">
+                    @Html.EditorFor(model => model.ARTWORK, new { htmlAttributes = new { type = "file", @class = "form-group", id = "art", Style = "padding:0px;margin:5px;margin-left:-500px", PlaceHolder = "Upload your artwork" } })
+                    @Html.ValidationMessageFor(model => model.ARTWORK, "", new { @class = "text-danger" })
+                </div>
+
+                <div style="float:left; margin-left:150px">
+                    <div class="triggercheck">
+                        @Html.DropDownListFor(model => model.CATEGORY, new SelectList(Enum.GetValues(typeof(Artistesta.Models.cats))), "Select Category", new { @class = "chosenvalue", htmlAttributes = new { @class = "inputText input", Style = "padding:0px;margin:5px;", PlaceHolder = "Choose a Category" } })
+                        @Html.ValidationMessageFor(model => model.INSPIRATION, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="triggercheck">
+                    @Html.LabelFor(model => model.FORSALE, "Available for Auction?", new { htmlAttributes = new { style = "padding-bottom:-90px;margin-bottom:-90px" } })
+                    @Html.CheckBoxFor(model => model.FORSALE, new { onclick = "addtrigger()", id = "bidcheck", htmlAttributes = new { style = "padding-bottom:-90px;margin-bottom:-90px", name = "FORSALE", value = '1' } })
+                    <!--<input style="display: none;" type="text" id="warnings" name="warnings" value='' placeholder="Enter trigger warnings">-->
+
+                    @Html.EditorFor(model => model.MINIMUMBID, new { @class = "unput", htmlAttributes = new { id = "bidset", Style = "display: none;", PlaceHolder = "Enter Minimum Bid Amount" } })
+                </div>
+
+                <div style="margin-top:300px;margin-right:170px;">
+                    <input type="submit" name="Post" id="button" class="batan" value="Post">
+                    <a href="~/Home/Index" style="appearance:none"><input onclick="" type="button" name="Cancel" id="button" class="batan cancel" value="Cancel"></a>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<script>
+    function addtrigger() {
+        var checkBox = document.getElementById("bidcheck");
+        var text = document.getElementById("bidset");
+        if (checkBox.checked == true) {
+            text.style.display = "inline-block";
+            text.className = "unput";
+        } else {
+            text.style.display = "none";
+        }
+    }
+</script>

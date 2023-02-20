@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24686ad5ddde4d28aca687203c66780a" Name="Diagram1">
+        <EntityTypeShape EntityType="ArtistestaModel.AUCTION" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.BIDDER" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.COMMENTS" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.FAVORITES" Width="1.5" PointX="5.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.FOLLOWER" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.INTERACTION" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.PUBLISHART" Width="1.5" PointX="3" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.SUPPORT" Width="1.5" PointX="3" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArtistestaModel.USER" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <AssociationConnector Association="ArtistestaModel.FK__BIDDER__ARTID__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__BIDDER__BIDDERID__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__COMMENTS__ARTID__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__COMMENTS__COMMEN__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__FAVORITES__ARTID__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__FAVORITES__USERI__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__FOLLOWER__FOLLOW__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__FOLLOWER__FOLLOW__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__INTERACTI__ARTID__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__INTERACTI__INTER__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__PUBLISHAR__USERI__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ArtistestaModel.FK__SUPPORT__USERID__628FA481" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

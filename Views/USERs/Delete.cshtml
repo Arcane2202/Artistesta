@@ -1,0 +1,128 @@
+﻿@model Artistesta.Models.USER
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>USER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIRST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BIRTHDAY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BIRTHDAY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRONOUNS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRONOUNS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COUNTRY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COUNTRY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COVER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COVER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOTTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOTTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARD_NO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARD_NO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATION_TIME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CREATION_TIME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
