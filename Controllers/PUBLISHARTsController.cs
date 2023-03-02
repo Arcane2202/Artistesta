@@ -9,6 +9,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Artistesta.Models;
+using System.IO;
+using System.Web.UI.WebControls;
+using System.Security.Policy;
 
 namespace Artistesta.Controllers
 {
@@ -53,7 +56,16 @@ namespace Artistesta.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PUBLISHART pUBLISHART)
         {
-            try { 
+            try {
+                string path = Server.MapPath("~/ImageFiles");
+                string fname = Path.GetFileName(pUBLISHART.File.FileName);
+                string fpath = Path.Combine(path, fname);
+                pUBLISHART.File.SaveAs(fpath);
+                pUBLISHART.ARTWORK = fpath;
+                var curid = Session["UserName"].ToString();
+                var user = db.USER.Where(x => x.USERNAME.Equals(curid)).FirstOrDefault();
+                var usid = user.USERID;
+                pUBLISHART.USERID = usid;
                 db.PUBLISHART.Add(pUBLISHART);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -64,6 +76,8 @@ namespace Artistesta.Controllers
                 return View();
             }
         }
+
+        
 
         // GET: PUBLISHARTs/Edit/5
         public ActionResult Edit(long? id)
@@ -121,7 +135,25 @@ namespace Artistesta.Controllers
             PUBLISHART pUBLISHART = db.PUBLISHART.Find(id);
             db.PUBLISHART.Remove(pUBLISHART);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("admin", "Home");
+        }
+
+        public ActionResult Approve(long? id)
+        {
+            PUBLISHART art = db.PUBLISHART.Find(id);
+            art.STATUS = "APPROVED";
+            db.Entry(art).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("admin", "Home");
+        }
+
+        public ActionResult Disapprove(long? id)
+        {
+            PUBLISHART art = db.PUBLISHART.Find(id);
+            art.STATUS = "Pending";
+            db.Entry(art).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("admin", "Home");
         }
 
         protected override void Dispose(bool disposing)

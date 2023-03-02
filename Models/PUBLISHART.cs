@@ -12,6 +12,8 @@ namespace Artistesta.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
+    using System.Web.UI.WebControls;
 
     public partial class PUBLISHART
     {
@@ -26,10 +28,13 @@ namespace Artistesta.Models
     
         public long ARTID { get; set; }
         public Nullable<int> USERID { get; set; }
+        [Required(ErrorMessage = "Field Cannot Be Empty")]
         public string INSPIRATION { get; set; }
         public string ARTWORK { get; set; }
+        [Required(ErrorMessage = "Field Cannot Be Empty")]
         public string TITLE { get; set; }
-        public string TIME { get; set; }
+        public string TIME { get; set; } = DateTime.Now.ToString();
+        [Required(ErrorMessage = "<br> Choose a category")]
         public string CATEGORY { get; set; }
         public Nullable<long> ENCOURAGES { get; set; }
         public Nullable<long> DISCOURAGES { get; set; }
@@ -40,8 +45,10 @@ namespace Artistesta.Models
         public string AUCTIONID { get; set; }
         public string CURHIGHESTBID { get; set; }
         public string CURBIDDERID { get; set; }
-        public string STATUS { get; set; }
-    
+        public string STATUS { get; set; } = "Pending";
+
+        public HttpPostedFileBase File { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BIDDER> BIDDER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -51,6 +58,9 @@ namespace Artistesta.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INTERACTION> INTERACTION { get; set; }
         public virtual USER USER { get; set; }
+
+
+
     }
     public enum cats
     {

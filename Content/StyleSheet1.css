@@ -23,7 +23,34 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.imgPrevPost {
+    display: none;
+    width: 48vw;
+    min-height: 200px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: antiquewhite;
+    border-radius: 5px;
+}
 
+    .imgPrevPost img {
+        display: none;
+        border-radius: 25px;
+    }
+
+.imgPrevImg {
+    display: none;
+    width: 100%;
+    border-radius:25px;
+}
+
+.showNone {
+    display: none;
+}
 input[type=number] {
     -moz-appearance: textfield;
 }

@@ -84,7 +84,7 @@ namespace Artistesta.Controllers
             {
                 db.Entry(uSER).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("admin", "Home");
             }
             return View(uSER);
         }
@@ -112,7 +112,7 @@ namespace Artistesta.Controllers
             USER uSER = db.USER.Find(id);
             db.USER.Remove(uSER);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("admin", "Home");
         }
 
         protected override void Dispose(bool disposing)

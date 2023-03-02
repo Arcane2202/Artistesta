@@ -4,114 +4,144 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="~/Content/styler.css" rel="stylesheet" type="text/css" media="all" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.INSPIRATION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ARTWORK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TITLE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TIME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CATEGORY)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ENCOURAGES)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DISCOURAGES)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FAVORITES)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISPINNED)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FORSALE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MINIMUMBID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AUCTIONID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CURHIGHESTBID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CURBIDDERID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USER.USERNAME)
-        </th>
-        <th></th>
-    </tr>
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.INSPIRATION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ARTWORK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TITLE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TIME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CATEGORY)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ENCOURAGES)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DISCOURAGES)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FAVORITES)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISPINNED)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FORSALE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MINIMUMBID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AUCTIONID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CURHIGHESTBID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CURBIDDERID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.USER.USERNAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ARTID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ARTID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ARTID })
-        </td>
-    </tr>
-}
+<body>
 
-</table>
+    <a style="appearance:none" href="~/Home/publishArt">
+        <div class="card" style="border-radius: 25px; box-shadow: 0 0 20px 2px rgba(0,0,0,0.5); width: 80vw; margin:20px; margin-left:-50px">
+
+            <input style="width: 100%; padding: 20px; margin: 10px; border: none; appearance: none; cursor: pointer;" placeholder="Publish a new artwork" disabled />
+
+        </div>
+    </a>
+
+    <div class="padding pt-0 mt-0">
+
+        <div id="tabs-section" class="tabs">
+            <ul class="tab-head">
+                <li>
+                    <a href="#tab-1" class="tab-link active"> <span class="tab-label">Manage Users</span></a>
+                </li>
+                <li>
+                    <a href="#tab-2" class="tab-link">  <span class="tab-label">Manage Posts</span></a>
+                </li>
+                <li>
+                    <a href="#tab-3" class="tab-link">  <span class="tab-label">Arrange Auctions</span></a>
+                </li>
+            </ul>
+
+            <section id="tab-1" class="tab-body entry-content active active-content">
+            
+            </section>
+
+            <section id="tab-2" class="tab-body entry-content">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ARTWORK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TITLE)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CATEGORY)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FORSALE)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MINIMUMBID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CURHIGHESTBID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CURBIDDERID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.USER.USERNAME)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ARTWORK)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TITLE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CATEGORY)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FORSALE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MINIMUMBID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CURHIGHESTBID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CURBIDDERID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.USER.USERNAME)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Approve", "Edit", new { id = item.ARTID }) | |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ARTID })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </section>
+
+            <section id="tab-3" class="tab-body entry-content">
+                <h2>BB Cream</h2>
+                <p>Personally, I prefer BB cream to regular foundation, as I find it to be much more natural-looking. It is a great option if you’re looking for something that has skincare benefits such as moisturizing or priming (some BB creams have primer built in).</p>
+                <p>In addition, if you are new to the makeup world, a good BB cream is an even better place to start than foundation, as it feels lighter on the skin, is hard to overdo, and can be applied with your fingers.</p>
+            </section>
+
+            <section id="tab-4" class="tab-body entry-content">
+                <h2>Concealer</h2>
+                <p>If you have acne, dark circles, or any kind of discoloration, concealer is a must-have.</p>
+                <p>Concealers come in full-coverage and sheerer-coverage formulations, and which one you should choose depends on how much you’re trying to cover up.</p>
+                <p>When choosing a concealer for acne and/or discoloration, find a shade that is as close as possible to your foundation/BB cream shade for the most natural look.</p>
+            </section>
+
+            <section id="tab-5" class="tab-body entry-content">
+                <h2>Blush</h2>
+                <p>Putting on blush can have a huge effect on your overall look, and I personally never leave it out of my makeup routine. Blush is especially necessary if you’re wearing a foundation with more opaque coverage, which can sometimes leave your complexion looking a little bit flat.</p>
+                <p>Blush comes in powder, gel, and cream formulations, with powder being the most popular. Recently, though, cream and gel blush have become very popular as well.</p>
+            </section>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/jquery-3.6.3.min.js"></script>
+<script src="https://kit.fontawesome.com/4550e4897d.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/Scripts/TABBED.js"></script>
+

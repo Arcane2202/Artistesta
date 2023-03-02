@@ -1,4 +1,5 @@
-﻿@model Artistesta.Models.PUBLISHART
+﻿@using Artistesta.Helper
+@model Artistesta.Models.PUBLISHART
 
 @{
     ViewBag.Title = "Create";
@@ -13,7 +14,7 @@
     <div id="poster" style="position: absolute;display:block;margin-top:-85px; width:100%;height:120vh;background-color: #000000aa; z-index: 999999">
         <div class="postBox" style="padding:20px; padding-left:0px; margin-top:150px" align="center">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <form method="post" action="">
+            <form method="post" , enctype="multipart/form-data" action="">
 
                 <div class="inputText">
 
@@ -32,8 +33,11 @@
                 </div>
 
                 <div class="inputText">
-                    @Html.EditorFor(model => model.ARTWORK, new { htmlAttributes = new { type = "file", @class = "form-group", id = "art", Style = "padding:0px;margin:5px;margin-left:-500px", PlaceHolder = "Upload your artwork" } })
-                    @Html.ValidationMessageFor(model => model.ARTWORK, "", new { @class = "text-danger" })
+                    <div class="imgPrevPost" id="imgPrevPost">
+                        <img src="" class="imgPrevImg" id="imgPrevImg" alt="img">
+                    </div>
+                    <input type='file' name='File' id='dp' style="border-radius:0; background-color:lightgray;">
+                     @Html.ValidationMessageFor(model => model.ARTWORK, "", new { @class = "text-danger" })
                 </div>
 
                 <div style="float:left; margin-left:150px">
@@ -51,7 +55,7 @@
                     @Html.EditorFor(model => model.MINIMUMBID, new { @class = "unput", htmlAttributes = new { id = "bidset", Style = "display: none;", PlaceHolder = "Enter Minimum Bid Amount" } })
                 </div>
 
-                <div style="margin-top:300px;margin-right:170px;">
+                <div style="margin-top:200px;margin-right:170px;margin-bottom:100px">
                     <input type="submit" name="Post" id="button" class="batan" value="Post">
                     <a href="~/Home/Index" style="appearance:none"><input onclick="" type="button" name="Cancel" id="button" class="batan cancel" value="Cancel"></a>
                 </div>
@@ -71,4 +75,32 @@
             text.style.display = "none";
         }
     }
+</script>
+
+<script>
+
+    const dp = document.getElementById("dp");
+    const div = document.getElementById("imgPrevPost");
+    const img = div.querySelector(".imgPrevImg");
+    const txt = div.querySelector(".imgPrevtext");
+
+    dp.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            img.style.display = "block";
+            div.style.display = "flex";
+
+
+            reader.addEventListener("load", function () {
+                img.setAttribute("src", this.result);
+            });
+            reader.readAsDataURL(file);
+        } else {
+            img.setAttribute("src", "");
+            img.style.display = null;
+            div.style.display = null;
+        }
+    });
+
 </script>

@@ -1,0 +1,1759 @@
+﻿@using Artistesta.Models
+@model Artistesta.Models.USER
+ 
+@{
+    ViewBag.Title = "homePage";
+
+
+    var name = Model.FIRST_NAME + " " + Model.LAST_NAME;
+    var dp = Model.DP;
+    var cover = Model.COVER;
+
+    ArtistestaEntities db = new ArtistestaEntities();
+    var curid = Session["UserName"].ToString();
+    var use = db.USER.Where(x => x.USERNAME.Equals(curid)).FirstOrDefault();
+    var uid = use.USERID;
+    var artsposted = db.PUBLISHART.OrderByDescending(x => x.ARTID).ToList();
+
+}
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="~/Content/styler.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+</head>
+
+<body>
+    @using (Html.BeginForm("Create", "PUBLISHARTs", FormMethod.Get, new { enctype = "multipart/form-data" }))
+    {
+        <a style="appearance:none" href="~/PUBLISHARTs/Create">
+            <div class="card" style="border-radius: 25px; box-shadow: none; width: 80vw; margin: 20px; align-items: center; justify-content: center;">
+
+                <input style="width: 100%; padding: 20px; margin: 10px; border: none; appearance: none; cursor: pointer;" placeholder="Publish a new artwork" disabled />
+
+            </div>
+        </a>
+    }
+    <div class="padding pt-0 mt-0" style="border-radius:25px;opacity:0.8">
+
+        <div id="tabs-section" class="tabs">
+            <ul class="tab-head" style="width: 10vw; box-shadow: 0 0 1px 1px rgba(0,0,0,0.5); overflow-y:scroll ">
+                <li>
+                    <a href="#tab-1" class="tab-link active">  <span class="tab-label">ABSTRACT</span></a>
+                </li>
+                <li>
+                    <a href="#tab-2" class="tab-link">  <span class="tab-label">ANIMALS</span></a>
+                </li>
+                <li>
+                    <a href="#tab-3" class="tab-link">  <span class="tab-label">ANIME</span></a>
+                </li>
+                <li>
+                    <a href="#tab-4" class="tab-link">  <span class="tab-label">ARCHITECTURE</span></a>
+                </li>
+                <li>
+                    <a href="#tab-5" class="tab-link">  <span class="tab-label">AUTOMOBILE</span></a>
+                </li>
+                <li>
+                    <a href="#tab-6" class="tab-link">  <span class="tab-label">BLACK & WHITE</span></a>
+                </li>
+                <li>
+                    <a href="#tab-7" class="tab-link">  <span class="tab-label">CITYSCAPE</span></a>
+                </li>
+                <li>
+                    <a href="#tab-8" class="tab-link">  <span class="tab-label">CALLIGRAPHY</span></a>
+                </li>
+                <li>
+                    <a href="#tab-9" class="tab-link">  <span class="tab-label">GAMES</span></a>
+                </li>
+                <li>
+                    <a href="#tab-10" class="tab-link">  <span class="tab-label">ILLUSTRATION</span></a>
+                </li>
+                <li>
+                    <a href="#tab-11" class="tab-link">  <span class="tab-label">MISC</span></a>
+                </li>
+                <li>
+                    <a href="#tab-12" class="tab-link">  <span class="tab-label">NATURE</span></a>
+                </li>
+                <li>
+                    <a href="#tab-13" class="tab-link">  <span class="tab-label">OBJECTS</span></a>
+                </li>
+                <li>
+                    <a href="#tab-14" class="tab-link">  <span class="tab-label">PORTRAIT</span></a>
+                </li>
+                <li>
+                    <a href="#tab-15" class="tab-link">  <span class="tab-label">SKETCH</span></a>
+                </li>
+                <li>
+                    <a href="#tab-16" class="tab-link">  <span class="tab-label">SUPERHERO</span></a>
+                </li>
+
+            </ul>
+
+            <section id="tab-1" class="tab-body entry-content active active-content">
+                <h2 style="margin-bottom:20px; opacity:0.9">Abstract Artworks</h2>
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("ABSTRACT"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                               @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+
+            </section>
+
+            <section id="tab-2" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("ANIMALS"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-3" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("ANIME"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-4" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("ARCHITECTURE"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-5" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("AUTOMOBILE"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+            <section id="tab-6" class="tab-body entry-content active active-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("BLACKandWHITE"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-7" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("CITYSCAPE"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-8" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("CALLIGRAPHY"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-9" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("GAMES"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="tab-10" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals(" @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("ILLUSTRATION"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                               @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </section>
+            <section id="tab-11" class="tab-body entry-content active active-content">
+                @foreach (var art in artsposted)
+{
+                    if (art.CATEGORY.Equals("MISC"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+
+            <section id="tab-12" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+{
+                    if (art.CATEGORY.Equals("NATURE"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+
+            <section id="tab-13" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+{
+                    if (art.CATEGORY.Equals("OBJECTS"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+
+            <section id="tab-14" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+{
+                    if (art.CATEGORY.Equals("PORTRAIT"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+
+            <section id="tab-15" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+{
+                    if (art.CATEGORY.Equals("SKETCH"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+            <section id="tab-16" class="tab-body entry-content">
+                @foreach (var art in artsposted)
+                {
+                    if (art.CATEGORY.Equals("SUPERHERO"))
+                    {
+                        string arr = art.ARTWORK.ToString();
+                        var artist = db.USER.Where(x => x.USERID == art.USERID).FirstOrDefault();
+                        var artistName = artist.FIRST_NAME + " " + artist.LAST_NAME;
+                        art.ARTWORK = Url.Content("~/" + art.ARTWORK.Substring(50));
+                        <div id="status" style="width: 80%; align-content: start; border-radius:0; box-shadow: none;margin-top:20px;border-top: solid thin; border-bottom:solid thin; border-color:black">
+                            <div style="width: 100%;">
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;padding-bottom:1%;border-color:gray;margin-right:0;margin-left:0">
+                                    <a href="" style="color:  var(--base); text-decoration:none; font-size:xx-large">
+                                        <span style="margin-bottom:0.5%">
+                                            @art.TITLE
+                                        </span>
+                                    </a>
+                                    <div class="smallerText" id="time"
+                                         style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        <div class="dropdown" style="margin-left:-37px;margin-top:0">
+                                            <i class="dropbtn fas fa-ellipsis-h" style="color:var(--base);font-size:large;"></i>
+                                            <div class="dropdown-content">
+                                                <a onclick="" href="">Make available for auction</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div style="border-bottom:solid thin;margin-bottom:0.5%;border-color:gray;margin-left:5px;margin-right:0; padding-bottom:20px;">
+                                    <span style="text-align:left;margin-left:-700px">
+                                        <a href="" style=" text-decoration:none;color: black">
+                                            <img src=@artist.DP style="border-radius:50%; width:3%;margin-bottom:0.5%;float:left">
+                                        </a>
+                                        <a href="" style="text-decoration:none;color: var(--base)">
+                                            <span class="" style="margin-top:6.5px;margin-left:2px;font-size:large; float:left"> @artistName </span>
+                                        </a>
+                                    </span>
+                                    <span class="smallerText" id="time"
+                                          style="margin-top:1%; margin-bottom:10px;color: var(--base); float:right">
+                                        @art.TIME
+                                    </span>
+
+
+                                </div>
+                                <div style="margin-bottom:-5.5%; margin-left:5px;border-bottom:solid thin;border-color:gray;">
+
+                                    <span class="" style=" font-size:larger; color:gray"> @art.INSPIRATION </span>
+                                </div>
+                                <div class="textsizeCorrect"
+                                     style="color:gray;margin-left: 2%;margin-right:0;border-bottom:solid thin;border-color:gray;">
+                                    <div class="texts">
+                                        <p style='color:darkslategray;margin-top:-30px;margin-bottom:-80px;padding-left:1px'>
+
+                                            <img src=@art.ARTWORK style="width:100%;border-radius:25px" />
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="reactSec">
+                                    <div class="react" style="padding-right:270px">
+
+                                        <a onclick='' href="" class="btn-with-hover" style="color: var(--col8); text-decoration:none;">
+
+                                            @if (art.ENCOURAGES == null || art.ENCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "enCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-up", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+
+                                    <div class="react" style="border:none">
+                                        <a href="" class="btn-with-hover" style="color: var(--col8);">
+                                            @if (art.DISCOURAGES == null || art.DISCOURAGES == 0)
+                                            {
+                                                @Html.ActionLink(" ", "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(art.ENCOURAGES.ToString(), "disCourage", "Home", new { id = art.ARTID }, new { @class = "fa fa-thumbs-down", style = "text-decoration:none;font-size:3vh;color:var(--base);" });
+
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+}
+            </section>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/jquery-3.6.3.min.js"></script>
+<script src="https://kit.fontawesome.com/4550e4897d.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/Scripts/TABBED.js"></script>

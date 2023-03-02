@@ -1,0 +1,225 @@
+﻿@using Artistesta.Models
+
+@{
+    ViewBag.Title = "admin";
+    ArtistestaEntities db = new ArtistestaEntities();
+    var alluser = db.USER.OrderByDescending(x => x.USERID).ToList();
+    var allposts = db.PUBLISHART.OrderByDescending(x => x.ARTID).ToList();
+}
+
+<html>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="~/Content/styler.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body>
+
+    <div class="padding pt-0 mt-0" style="opacity: 0.8">
+
+        <nav class="header_wrapper navbar navbar-expand-sm fixed-top" style="background-color:black; margin-bottom:150px;">
+            <div class="container-fluid justify-content-center" style="color:white">
+                Admin Panel
+            </div>
+        </nav>
+
+        <div id="tabs-section" class="tabs" style="width:90vw; height:96vh;margin-top:46px">
+            <ul class="tab-head" style="width: 10vw; box-shadow: 0 0 1px 1px rgba(0,0,0,0.5); overflow-y:scroll ">
+                <li>
+                    <a href="#tab-1" class="tab-link active"> <span class="tab-label">Manage Users</span></a>
+                </li>
+                <li>
+                    <a href="#tab-2" class="tab-link">  <span class="tab-label">Manage Posts</span></a>
+                </li>
+                <li>
+                    <a href="#tab-3" class="tab-link">  <span class="tab-label">Arrange Auctions</span></a>
+                </li>
+            </ul>
+
+            <section id="tab-1" class="tab-body entry-content active active-content" ; style="overflow-x:scroll; overflow-y:scroll">
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            USERNAME
+                        </th>
+                        <th>
+                            FIRST_NAME
+                        </th>
+                        <th>
+                            LAST_NAME
+                        </th>
+                        <th>
+                            EMAIL
+                        </th>
+                        <th>
+                            BIRTHDAY
+                        </th>
+                        <th>
+                            COUNTRY
+                        </th>
+                        <th>
+                            PASSWORD
+                        </th>
+                        <th>
+                            DP
+                        </th>
+                        <th>
+                            COVER
+                        </th>
+                        <th>
+                            CARD_NO
+                        </th>
+                        <th>
+                            CREATION_TIME
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in alluser)
+                    {
+                        <tr>
+                            <td>
+                                @item.USERNAME
+                            </td>
+                            <td>
+                                @item.FIRST_NAME
+                            </td>
+                            <td>
+                                @item.LAST_NAME
+                            </td>
+                            <td>
+                                @item.EMAIL
+                            </td>
+                            <td>
+                                @item.BIRTHDAY
+                            </td>
+                            <td>
+                                @item.COUNTRY
+                            </td>
+                            <td>
+                                @item.PASSWORD
+                            </td>
+                            <td>
+                                <img src=@item.DP style="width:100px" />
+                            </td>
+                            <td>
+                                <img src=@item.COVER style="width:100px" />
+                            </td>
+                            <td>
+                                @item.CARD_NO
+                            </td>
+                            <td>
+                                @item.CREATION_TIME
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "USERs", new { id = item.USERID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "USERs", new { id = item.USERID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+
+            </section>
+
+            <section id="tab-2" class="tab-body entry-content" style="overflow-x:scroll; overflow-y:scroll">
+                <table class="table">
+                    <tr>
+                        <th>
+                            ARTWORK
+                        </th>
+                        <th>
+                            TITLE
+                        </th>
+                        <th>
+                            CATEGORY
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            FORSALE?
+                        </th>
+                        <th>
+                            MINIMUM BID
+                        </th>
+                        <th>
+                            CURRENT HIGHEST BIDDER ID
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in allposts)
+                    {
+                        item.ARTWORK = Url.Content("~/" + item.ARTWORK.Substring(50));
+                        <tr>
+                            <td>
+                                <img src=@item.ARTWORK style="width:250px" />
+                            </td>
+                            <td>
+                                @item.TITLE
+                            </td>
+                            <td>
+                                @item.CATEGORY
+                            </td>
+                            <td>
+                                @item.STATUS
+                            </td>
+                            <td>
+                                @item.FORSALE
+                            </td>
+                            <td>
+                                @item.MINIMUMBID
+                            </td>
+                            <td>
+                                @item.CURHIGHESTBID
+                            </td>
+                            <td>
+                                @item.CURBIDDERID
+                            </td>
+                            <td>
+                                @if (item.STATUS == "Pending")
+                                {
+                                    @Html.ActionLink("Approve |", "Approve", "PUBLISHARTs", new { id = item.ARTID }, null)
+                                    @Html.ActionLink("Delete", "Delete", "PUBLISHARTs", new { id = item.ARTID }, null)
+                                }
+
+                                else
+                                {
+                                    @Html.ActionLink("Disaprove |", "Disapprove", "PUBLISHARTs", new { id = item.ARTID }, null)
+                                    @Html.ActionLink("Delete", "Delete", "PUBLISHARTs", new { id = item.ARTID }, null)
+                                }
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </section>
+
+            <section id="tab-3" class="tab-body entry-content">
+            </section>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/jquery-3.6.3.min.js"></script>
+<script src="https://kit.fontawesome.com/4550e4897d.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="~/Scripts/TABBED.js"></script>
+

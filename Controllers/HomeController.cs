@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -74,8 +75,8 @@ namespace Artistesta.Controllers
                 em.Subject = "Verification Code";
                 em.Body = $"Your Artistesta Verification Code is {curotp}";
                 em.sendEmail();
-                user.DP = "../Content/defaultDP.svg";
-                user.COVER = "../Content/defaultCover.jpg";
+                user.DP = Server.MapPath("~/ Content / defaultDP.svg");
+                user.COVER =  Server.MapPath("~/Content/defaultCover.jpg");
                 TempData["user"] = user;
                 return RedirectToAction("VerifyOTP", "Home");
                 //db.USER.Add(user);
@@ -133,6 +134,11 @@ namespace Artistesta.Controllers
             }
         }
 
+        public ActionResult admin()
+        {
+            return View();
+        }
+
         public ActionResult Logout()
         {
               Session["UserName"] = null;
@@ -142,6 +148,117 @@ namespace Artistesta.Controllers
         public ActionResult publishArt()
         {
             return View();
+        }
+
+        public ActionResult homePage()
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var curid = Session["UserName"].ToString();
+            var user = db.USER.Where(x => x.USERNAME.Equals(curid)).FirstOrDefault();
+            return View(user);
+        }
+
+        public ActionResult DisplayImage(int id)
+        {
+            string physicalPath = db.PUBLISHART.Find(id).ARTWORK;
+            string virtualPath = Url.Content("~/" + physicalPath);
+            return File(virtualPath, "image/jpeg");
+        }
+
+        public ActionResult enCourage(long id) {
+
+            var art = db.PUBLISHART.Where(x => x.ARTID == id).FirstOrDefault();
+            var curuser = Session["UserName"].ToString();
+            var cuid = db.USER.Where(x => x.USERNAME.Equals(curuser)).FirstOrDefault().USERID;
+            var chk = db.INTERACTION.Where(x => x.ARTID == art.ARTID && x.INTERACTORID==cuid).FirstOrDefault();
+            if (chk == null)
+            {
+                art.ENCOURAGES++;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                INTERACTION intr = new INTERACTION();
+                intr.INTERACTORID = cuid;
+                intr.ARTID = art.ARTID;
+                intr.ENCDISC = "Encourage";
+                db.INTERACTION.Add(intr);
+                db.SaveChanges();
+                return RedirectToAction("homePage", "Home");
+            }
+            else if(chk.ENCDISC == "Discourage")
+            {
+                art.ENCOURAGES++;
+                art.DISCOURAGES--;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                chk.ENCDISC = "Encourage";
+                db.Entry(chk).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("homePage", "Home");
+
+            } 
+            else
+            {
+                art.ENCOURAGES--;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                db.INTERACTION.Remove(chk);
+                db.SaveChanges();
+                return RedirectToAction("homePage", "Home");
+            }
+
+        }
+
+        public ActionResult disCourage(long id)
+        {
+
+            var art = db.PUBLISHART.Where(x => x.ARTID == id).FirstOrDefault();
+            var curuser = Session["UserName"].ToString();
+            var cuid = db.USER.Where(x=>x.USERNAME.Equals(curuser)).FirstOrDefault().USERID;
+            var chk = db.INTERACTION.Where(x => x.ARTID == art.ARTID && x.INTERACTORID==cuid).FirstOrDefault();
+            if (chk == null)
+            {
+                art.DISCOURAGES++;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                INTERACTION intr = new INTERACTION();
+                intr.INTERACTORID = cuid;
+                intr.ARTID = art.ARTID;
+                intr.ENCDISC = "Discourage";
+                db.INTERACTION.Add(intr);
+                db.SaveChanges();
+                return RedirectToAction("homePage", "Home");
+            }
+            else if (chk.ENCDISC == "Encourage")
+            {
+                art.ENCOURAGES--;
+                art.DISCOURAGES++;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                chk.ENCDISC = "Discourage";
+                db.Entry(chk).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("homePage", "Home");
+
+            }
+            else
+            {
+                art.DISCOURAGES--;
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+
+                db.INTERACTION.Remove(chk);
+                db.SaveChanges(); 
+                return RedirectToAction("homePage", "Home");
+            }
+
         }
     }
 }
